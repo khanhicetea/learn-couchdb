@@ -1,0 +1,22 @@
+version: '2'
+
+volumes:
+    volume_couchdb:
+        driver: local
+
+networks:
+    local-network:
+        driver: bridge
+
+services:
+    couchdb:
+        image: klaemo/couchdb:2.0.0
+        volumes:
+            - volume_couchdb:/usr/local/var/lib/couchdb
+        environment:
+            COUCHDB_USER: admin
+            COUCHDB_PASSWORD: passwd
+        ports:
+            - "5984:5984"
+        networks:
+            - local-network
